@@ -18,8 +18,9 @@ func (v *validator) Validate(payload string) error {
 
 func NewGate(enabled bool) Gate {
 	if !enabled {
-		var gate *validator
-		return gate
+		// 返回真正的 nil interface，避免"非空 interface 包 nil 指针"导致
+		// 调用方在 nil 检查后仍触发方法调用而崩溃。停用即安全跳过。
+		return nil
 	}
 	return &validator{enabled: true}
 }
