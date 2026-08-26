@@ -1,6 +1,9 @@
 package flow17
 
-import "pet-care/internal/state17"
+import (
+	"errors"
+	"pet-care/internal/state17"
+)
 
 func Forward(source *state17.Source, attempts int) error {
 	var last error
@@ -10,9 +13,11 @@ func Forward(source *state17.Source, attempts int) error {
 			return nil
 		}
 		last = err
-		if err != nil {
+		var temporary *state17.Temporary
+		if errors.As(err, &temporary) {
 			continue
 		}
+		return err
 	}
 	return last
 }
