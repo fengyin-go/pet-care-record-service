@@ -35,5 +35,5 @@ func Normalize(err error) error {
 	if err == nil {
 		return nil
 	}
-	return fmt.Errorf("signal outcome: %v", err)
+	return fmt.Errorf("signal outcome: %w", err)
 }
