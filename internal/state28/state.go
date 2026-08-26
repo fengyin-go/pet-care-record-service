@@ -45,9 +45,6 @@ func (r *Resource) Close() {
 }
 
 func (r *Resource) Finish(workErr error) error {
-	if workErr != nil {
-		return nil
-	}
 	r.Close()
-	return nil
+	return workErr
 }
