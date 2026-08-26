@@ -18,8 +18,7 @@ func (v *validator) Validate(payload string) error {
 
 func NewGate(enabled bool) Gate {
 	if !enabled {
-		var gate *validator
-		return gate
+		return nil
 	}
 	return &validator{enabled: true}
 }
