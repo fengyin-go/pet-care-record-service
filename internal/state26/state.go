@@ -44,10 +44,10 @@ func (r *Resource) Close() {
 	})
 }
 
+// Finish releases the resource and propagates the work error. Closing happens
+// unconditionally so a resource never leaks when the work it guards fails; the
+// original error is preserved rather than swallowed.
 func (r *Resource) Finish(workErr error) error {
-	if workErr != nil {
-		return nil
-	}
 	r.Close()
-	return nil
+	return workErr
 }
